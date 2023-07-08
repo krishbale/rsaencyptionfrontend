@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 import axios from "axios";
-import  rsaencrypt  from './rsa';
+import  encryptedMessage  from './rsa';
 export default function Home() {
   const [message, setMessage] = useState('');
   const [publickey,setpublickeys] = useState('');
@@ -25,7 +25,7 @@ export default function Home() {
 
   
   function sendMessage(){
-    const encryptedmessage =  rsaencrypt(publickey,message);
+    const encryptedmessage =  encryptedMessage(message,publickey);
     console.log(`Encryted message before sending to server : ${encryptedmessage}`)
     axios.post('/sendmessagewithrsa', { data:encryptedmessage} )
     .then((response) => {

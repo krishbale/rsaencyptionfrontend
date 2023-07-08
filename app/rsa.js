@@ -1,7 +1,10 @@
-import NodeRSA from "node-rsa";
-export default function rsaencrypt(key,text){
-            const  keyPublic = new NodeRSA(key)
-            const encrypted = keyPublic.encrypt(text,'base64')
-            return encrypted 
-
-}
+import * as crypto from 'crypto';
+const encryptMessage = (message, publicKey) => {
+    const encryptedBuffer = crypto.publicEncrypt(
+      publicKey,
+      Buffer.from(message, 'utf8'),
+    );
+    const encryptedMessage = encryptedBuffer.toString('base64');
+    return encryptedMessage;
+  };
+  module.exports =  encryptMessage
